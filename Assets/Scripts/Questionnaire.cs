@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class PopUSystem : MonoBehaviour
 {
 
-    public TMP_InputField inputField;  // TextMeshPro input field
+    public TMP_InputField numberOfMeals;  // TextMeshPro input field
 
     public Toggle italianToggle;
     public Toggle chineseToggle;
@@ -25,9 +25,10 @@ public class PopUSystem : MonoBehaviour
     
     void OnSubmit()
     {
-      
+        //only stored inputs in the variables for now
+        int mealGoal = int.parse(numberOfMeals.text); //goal for number of meals
         
-        List<string> selectedCuisines = new List<string>();
+        List<string> selectedCuisines = new List<string>(); //list of types of meals user will eat
 
         if (italianToggle.isOn) selectedCuisines.Add("Italian");
         if (chineseToggle.isOn) selectedCuisines.Add("Chinese");
@@ -35,7 +36,7 @@ public class PopUSystem : MonoBehaviour
         if (indianToggle.isOn) selectedCuisines.Add("Indian");
         if (mediterraneanToggle.isOn) selectedCuisines.Add("Mediterranean");
         
-        string willingness = yesToggle.isOn ? "Yes" : "No";
+        string willingness = yesToggle.isOn ? "Yes" : "No"; //will user try every type of dish
 
         resultText.text = "Selected cuisines: " + string.Join(", ", selectedCuisines) + "\n" +
                           "Willing to try new cuisines: " + willingness;
