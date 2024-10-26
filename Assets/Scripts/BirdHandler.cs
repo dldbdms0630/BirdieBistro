@@ -9,8 +9,8 @@ public class BirdHandler : MonoBehaviour
     public BirdData birdData; 
     public GameObject speechBubble;
     public TextMeshProUGUI dialogueText; // make into textmeshpro instead?? 
-    public GameObject recipeInputButton;
-    public MealForm mealForm;
+    public Button recipeInputButton;
+    public GameObject mealForm;
     public Vector3 zoomedInScale = new Vector3(1.1f, 1.1f, 1f);
     public Vector3 zoomedInPosition = new Vector3(-4.14f, -1.3f, -1.44f);
     public Sprite happySprite;
@@ -30,7 +30,7 @@ public class BirdHandler : MonoBehaviour
         // hide UI initially 
         speechBubble.SetActive(false);
         dialogueText.gameObject.SetActive(false);
-        recipeInputButton.SetActive(false);
+        recipeInputButton.gameObject.SetActive(false);
         mealForm.SetActive(false);
         birdName = gameObject.name;
     }
@@ -48,7 +48,6 @@ public class BirdHandler : MonoBehaviour
             ZoomOut();
             ReactivateOtherBirds();
         }
-        
     }
 
     void ZoomIn()
@@ -58,18 +57,19 @@ public class BirdHandler : MonoBehaviour
         isZoomedIn = true;
         speechBubble.SetActive(true);
         dialogueText.gameObject.SetActive(true);        
-        recipeInputButton.SetActive(true);
+        recipeInputButton.gameObject.SetActive(true);
 
         recipeInputButton.onClick.AddListener(OnMealFormClicked);
         
 
         dialogueText.text = birdData.GetBirdByName(birdName).dialogue;
     }
+
     void OnMealFormClicked()
     {
         if (mealForm != null)
         {
-            mealForm.setActive(true);
+            mealForm.SetActive(true);
         }
         else
         {
@@ -83,7 +83,7 @@ public class BirdHandler : MonoBehaviour
         transform.position = originalPosition; 
         isZoomedIn = false;
         speechBubble.SetActive(false);
-        recipeInputButton.SetActive(false);
+        recipeInputButton.gameObject.SetActive(false);
 
         dialogueText.gameObject.SetActive(false);
     }

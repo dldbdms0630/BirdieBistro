@@ -50,7 +50,7 @@ public class BirdData : MonoBehaviour
             dialogue_love = "This hits the spot!", dialogue_hate = "Where's the wok magic??",
             preferredCuisine = "Chinese", heartCount = 3 });
 
-        birds.Add(new Bird { name = "Hummingbird", dialogue = "I'm craving some salsa... not the dance!", 
+        birds.Add(new Bird { name = "Hummingbird", dialogue = "Craving some salsa... not the dance!", 
             dialogue_love = "¡Esto es una FIESTA!", dialogue_hate = "This doesn’t exactly scream Taco Tuesday...",
             preferredCuisine = "Mexican", heartCount = 3 });
 
