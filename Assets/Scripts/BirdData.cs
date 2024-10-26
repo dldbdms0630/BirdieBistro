@@ -6,6 +6,6 @@ using UnityEngine;
 public class BirdData : MonoBehaviour
 {
     public string birdName;
-    public string dialogueText; // What the bird says
+    public string dialogue; // What the bird says
     public string preferredCuisine; // Example: "Italian", "Spicy", etc.
 }
