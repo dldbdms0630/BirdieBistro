@@ -412,7 +412,6 @@ GameObject:
   m_Component:
   - component: {fileID: 404813451}
   - component: {fileID: 404813450}
-  - component: {fileID: 404813452}
   - component: {fileID: 404813453}
   - component: {fileID: 404813454}
   m_Layer: 0
@@ -489,21 +488,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &404813452
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 404813449}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 692a4aa4d4cbc47b5b535c29a5e5f549, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  birdName: Cockatoo
-  dialogue: A taste of hummus or olives, perhaps?
-  preferredCuisine: Mexican
 --- !u!114 &404813453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -516,7 +500,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7aa41bcc863d64ade8b2c7e17750dbec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  birdData: {fileID: 404813452}
+  birdData: {fileID: 1957078190}
   speechBubble: {fileID: 709683845}
   dialogueText: {fileID: 379908621}
   recipeInputButton: {fileID: 992272311}
@@ -669,6 +653,8 @@ GameObject:
   m_Component:
   - component: {fileID: 643615764}
   - component: {fileID: 643615763}
+  - component: {fileID: 643615766}
+  - component: {fileID: 643615765}
   m_Layer: 0
   m_Name: Opaline
   m_TagString: Untagged
@@ -743,6 +729,69 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &643615765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 643615762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7aa41bcc863d64ade8b2c7e17750dbec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  birdData: {fileID: 1957078190}
+  speechBubble: {fileID: 709683845}
+  dialogueText: {fileID: 379908621}
+  recipeInputButton: {fileID: 992272311}
+  zoomedInScale: {x: 1.1, y: 1.1, z: 1}
+  originalScale: {x: 0, y: 0, z: 0}
+--- !u!61 &643615766
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 643615762}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.43152916, y: -0.3452258}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 20.48, y: 20.48}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 8.224512, y: 8.282048}
+  m_EdgeRadius: 0
 --- !u!1 &709683845
 GameObject:
   m_ObjectHideFlags: 0
@@ -1221,6 +1270,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1418743131}
   - component: {fileID: 1418743130}
+  - component: {fileID: 1418743133}
+  - component: {fileID: 1418743132}
   m_Layer: 0
   m_Name: Redbird
   m_TagString: Untagged
@@ -1295,6 +1346,69 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1418743132
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418743129}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.37399387, y: 0.5178375}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 20.48, y: 20.48}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 8.339586, y: 10.123249}
+  m_EdgeRadius: 0
+--- !u!114 &1418743133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418743129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7aa41bcc863d64ade8b2c7e17750dbec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  birdData: {fileID: 1957078190}
+  speechBubble: {fileID: 709683845}
+  dialogueText: {fileID: 379908621}
+  recipeInputButton: {fileID: 992272311}
+  zoomedInScale: {x: 1.1, y: 1.1, z: 1}
+  originalScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1530662286
 GameObject:
   m_ObjectHideFlags: 0
@@ -1429,6 +1543,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1530662286}
   m_CullTransparentMesh: 1
+--- !u!1 &1957078189
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1957078191}
+  - component: {fileID: 1957078190}
+  m_Layer: 0
+  m_Name: BIRD DATA
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1957078190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1957078189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 692a4aa4d4cbc47b5b535c29a5e5f549, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1957078191
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1957078189}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.1426955, y: 1.4174979, z: -1.5056573}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1443,3 +1601,4 @@ SceneRoots:
   - {fileID: 230495916}
   - {fileID: 874146778}
   - {fileID: 1125999783}
+  - {fileID: 1957078191}

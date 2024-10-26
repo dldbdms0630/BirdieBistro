@@ -12,7 +12,9 @@ public class BirdHandler : MonoBehaviour
     public GameObject recipeInputButton;
     public Vector3 zoomedInScale = new Vector3(1.1f, 1.1f, 1f);
     public Vector3 originalScale;
+
     private bool isZoomedIn = false;
+    private string birdName; 
 
     void Start()
     {
@@ -21,7 +23,7 @@ public class BirdHandler : MonoBehaviour
         speechBubble.SetActive(false);
         dialogueText.gameObject.SetActive(false);
         // recipeInputButton.SetActive(false);
-
+        birdName = gameObject.name;
     }
 
     void OnMouseDown()
@@ -44,8 +46,8 @@ public class BirdHandler : MonoBehaviour
         isZoomedIn = true;
         speechBubble.SetActive(true);
         dialogueText.gameObject.SetActive(true);
-        // dialogueText.text = "SampleText";
-        dialogueText.text = birdData.dialogue;
+
+        dialogueText.text = birdData.GetBirdByName(birdName).dialogue;
     }
 
     void ZoomOut()
