@@ -146,6 +146,7 @@ public class BirdHandler : MonoBehaviour
         {
             Debug.LogWarning("mealform is not assigned.");
         }
+        ReactivateBirdInteraction();
     }
 
     void ZoomOut()
