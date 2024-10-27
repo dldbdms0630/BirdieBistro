@@ -39,7 +39,7 @@ public class Questionnaire : MonoBehaviour
         
         // if (yesToggle.isOn) then we put all birds in the selected
         // and also call BirdData to update it 
-        birdData.Start();
+        birdData.ResetBirds();
 
         if (!yesToggle.isOn) // then not willing to try new cuisines. 
         {
