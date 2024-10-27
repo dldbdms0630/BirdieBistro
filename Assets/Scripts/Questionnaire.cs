@@ -5,40 +5,55 @@
 // public class PopUSystem : MonoBehaviour
 // {
 
-//     public TMP_InputField inputField;  // TextMeshPro input field
+    public TMP_InputField numberOfMeals;  // TextMeshPro input field
 
-//     public Toggle italianToggle;
-//     public Toggle chineseToggle;
-//     public Toggle mexicanToggle;
-//     public Toggle indianToggle;
-//     public Toggle mediterraneanToggle;
-//     public Toggle yesToggle;
-//     public Toggle noNewCuisines;
+    public Toggle italianToggle;
+    public Toggle chineseToggle;
+    public Toggle mexicanToggle;
+    public Toggle indianToggle;
+    public Toggle mediterraneanToggle;
+    public Toggle yesToggle;
+    public Toggle noNewCuisines;
 
-//     public Button submitButton; //name submit button this var.
-//     public TextMeshProUGUI displayText;
+    public Button submitButton; //name submit button this var.
+    public TextMeshProUGUI displayText;
 
-//     void Start() 
-//     {
-//         submitButton.onClick.AddListener(OnSubmit);
-//     }
+    void Start() 
+    {
+        submitButton.onClick.AddListener(OnSubmit);
+    }
     
-//     void OnSubmit()
-//     {
+    void OnSubmit()
+    {
         
-//         List<string> selectedCuisines = new List<string>();
+    List<string> selectedCuisines = new List<string>();
+    public int mealGoal;
+    public List<string> selectedCuisines;
+    string willingness;
 
-//         if (italianToggle.isOn) selectedCuisines.Add("Italian");
-//         if (chineseToggle.isOn) selectedCuisines.Add("Chinese");
-//         if (mexicanToggle.isOn) selectedCuisines.Add("Mexican");
-//         if (indianToggle.isOn) selectedCuisines.Add("Indian");
-//         if (mediterraneanToggle.isOn) selectedCuisines.Add("Mediterranean");
+    void Start() 
+    {
+        submitButton.onClick.AddListener(OnSubmit);
+    }
+    
+    void OnSubmit()
+    {
+        //only stored inputs in the variables for now
+        mealGoal = int.parse(numberOfMeals.text); //goal for number of meals
         
-//         string willingness = yesToggle.isOn ? "Yes" : "No";
+        selectedCuisines = new List<string>(); //list of types of meals user will eat
 
-//         resultText.text = "Selected cuisines: " + string.Join(", ", selectedCuisines) + "\n" +
-//                           "Willing to try new cuisines: " + willingness;
+        if (italianToggle.isOn) selectedCuisines.Add("Italian");
+        if (chineseToggle.isOn) selectedCuisines.Add("Chinese");
+        if (mexicanToggle.isOn) selectedCuisines.Add("Mexican");
+        if (indianToggle.isOn) selectedCuisines.Add("Indian");
+        if (mediterraneanToggle.isOn) selectedCuisines.Add("Mediterranean");
+        
+        string willingness = yesToggle.isOn ? "Yes" : "No"; //will user try every type of dish
 
-//         Debug.Log(resultText.text);
-//     }
-// }
+        resultText.text = "Selected cuisines: " + string.Join(", ", selectedCuisines) + "\n" +
+                          "Willing to try new cuisines: " + willingness;
+
+        Debug.Log(resultText.text);
+    }
+}

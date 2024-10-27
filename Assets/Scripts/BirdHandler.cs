@@ -22,6 +22,7 @@ public class BirdHandler : MonoBehaviour
 
     private bool isZoomedIn = false;
     private string birdName; 
+    private int mealCount = 0;
 
     private List<BirdHandler> otherBirds = new List<BirdHandler>();
 
@@ -89,7 +90,10 @@ public class BirdHandler : MonoBehaviour
     {
         if (mealForm != null)
         {
-            mealForm.SetActive(true);
+            mealForm.setActive(true);
+            if (mealForm.complete) {
+                mealCount++; //gotta reset mealcount everyday (DATETIME) 
+            }
         }
         else
         {
