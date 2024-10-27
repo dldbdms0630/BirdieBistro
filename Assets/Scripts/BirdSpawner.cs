@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,36 +10,105 @@ public class BirdSpawner : MonoBehaviour
 {
 
     public BirdData birdDatabase; 
-    // public GameObject birdPrefab;
-    // public Transform spawnArea;
     public Button inviteButton;
+
+    private int maxInvitesPerDay = 3;
+    private int currentInvitesToday = 0;
+    private DateTime lastInviteDate;
 
     [SerializeField] private GameObject speechBubble;
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private Button recipeInputButton;
     [SerializeField] private GameObject mealForm;
+    [SerializeField] private TextMeshProUGUI mealCountText;
     
     void Start()
     {
         inviteButton.onClick.AddListener(InviteNewBird);
+
+        LoadInviteData();
+
+        if (IsNewDay()) 
+        {
+            ResetDailyInvites();
+        }
         UpdateInviteButton();
     }
 
     public void InviteNewBird()
     {
-        // Debug.Log("BirdInvited");
-        if (NoBirdsInScene())
+        // if (NoBirdsInScene())
+        if (currentInvitesToday < maxInvitesPerDay)
         {
-            BirdData.Bird randomBirdData = GetRandomBirdData();
-            SpawnBird(randomBirdData); // invite the random bird 
+            List<BirdData.Bird> availableBirds = GetAvailableBirds();
+
+            if (availableBirds.Count > 0)
+            {
+                BirdData.Bird randomBirdData = availableBirds[UnityEngine.Random.Range(0, availableBirds.Count)];
+                SpawnBird(randomBirdData);
+                currentInvitesToday++;
+                lastInviteDate = DateTime.Now;
+
+                SaveInviteData();
+            }
+            else 
+            {
+                Debug.LogWarning("No new bird types available to invite!");
+            }
+
+            UpdateInviteButton();
         }
-        UpdateInviteButton(); // disable button after bird is invited 
+        else
+        {
+            Debug.LogWarning("Max invites reached for today.");
+            inviteButton.interactable = false;
+        }
     }
+
+    private List<BirdData.Bird> GetAvailableBirds()
+    {
+        List<BirdData.Bird> availableBirds = new List<BirdData.Bird>();
+
+        // Iterate through all birds in the database.
+        foreach (BirdData.Bird bird in birdDatabase.birds)
+        {
+            // Add the bird to the available list if it's not already in the village.
+            if (!BirdAlreadyInVillage(bird.name))
+            {
+                availableBirds.Add(bird);
+            }
+        }
+
+        return availableBirds;
+    }
+
+    private bool BirdAlreadyInVillage(string birdName)
+    {
+        // Check if a bird with the given name is already in the village.
+        BirdHandler[] existingBirds = FindObjectsOfType<BirdHandler>();
+        foreach (BirdHandler bird in existingBirds)
+        {
+            if (bird.birdData.name == birdName)
+            {
+                return true; // Bird with this name is already in the village.
+            }
+        }
+        return false;
+    }
+
 
     private BirdData.Bird GetRandomBirdData()
     {
-        int randomIndex = Random.Range(0, birdDatabase.birds.Count);
-        return birdDatabase.birds[randomIndex];
+        if (birdDatabase != null && birdDatabase.birds.Count > 0)
+        {
+            int randomIndex = UnityEngine.Random.Range(0, birdDatabase.birds.Count);
+            return birdDatabase.birds[randomIndex];
+        }
+        else
+        {
+            Debug.LogWarning("Bird database is empty or not assigned.");
+            return null;
+        }
     }
 
     private void SpawnBird(BirdData.Bird birdData)
@@ -50,24 +120,7 @@ public class BirdSpawner : MonoBehaviour
                 Quaternion.identity);
 
             BirdHandler birdHandler = bird.GetComponent<BirdHandler>();
-            birdHandler.AssignBirdData(birdData, speechBubble, dialogueText, recipeInputButton, mealForm);
-
-
-            // GameObject speechBubble = GameObject.Find("DialogueBox"); // Adjust the name to match the actual object in your scene.
-            
-            
-            // if (speechBubble == null)
-            // {
-            //     Debug.LogWarning("Speech Bubble not found!");
-            // }
-            // else{
-            //     Debug.Log(" speech bubble found!!");
-            // }
-        
-            // TextMeshProUGUI dialogueText = GameObject.Find("DialogueText")?.GetComponent<TextMeshProUGUI>();
-            // Button recipeInputButton = GameObject.Find("Feed")?.GetComponent<Button>();
-            // GameObject mealForm = GameObject.Find("MealForm");
-
+            birdHandler.AssignBirdData(birdData, speechBubble, dialogueText, recipeInputButton, mealForm, inviteButton, mealCountText);
         } else 
             Debug.LogWarning($"BirdData for {birdData.name} does not have an assigned prefab.");
     }
@@ -80,19 +133,56 @@ public class BirdSpawner : MonoBehaviour
         float yMin = -3f;
         float yMax = -1f;
 
-        float randomX = Random.Range(xMin, xMax);
-        float randomY = Random.Range(yMin, yMax);
+        float randomX = UnityEngine.Random.Range(xMin, xMax);
+        float randomY = UnityEngine.Random.Range(yMin, yMax);
 
         return new Vector3(randomX, randomY, -1f);
     }
 
-    private bool NoBirdsInScene()
+
+    // private bool NoBirdsInScene()
+    // {
+    //     return GameObject.FindObjectsOfType<BirdHandler>().Length == 0;
+    // }
+
+    private void ResetDailyInvites()
     {
-        return GameObject.FindObjectsOfType<BirdHandler>().Length == 0;
+        currentInvitesToday = 0;
+        SaveInviteData();
+        UpdateInviteButton();
+    }
+
+    private bool IsNewDay()
+    {
+        // check if last invite date is different from today. if true then is new day
+        // return lastInviteDate.Date != DateTime.Now.Date;
+        return true;
     }
 
     private void UpdateInviteButton()
     {
-        inviteButton.gameObject.SetActive(NoBirdsInScene());
+        inviteButton.interactable = (currentInvitesToday < maxInvitesPerDay);
+    }
+
+    private void LoadInviteData()
+    {
+        currentInvitesToday = PlayerPrefs.GetInt("CurrentInvitesToday", 0);
+        string lastDateString = PlayerPrefs.GetString("LastInviteDate", DateTime.Now.ToString());
+
+        if (DateTime.TryParse(lastDateString, out DateTime parsedDate))
+        {
+            lastInviteDate = parsedDate;
+        }
+        else
+        {
+            lastInviteDate = DateTime.Now;
+        }
+    }
+
+    private void SaveInviteData()
+    {
+        PlayerPrefs.SetInt("CurrentInvitesToday", currentInvitesToday);
+        PlayerPrefs.SetString("LastInviteDate", lastInviteDate.ToString());
+        PlayerPrefs.Save();
     }
 }

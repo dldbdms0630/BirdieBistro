@@ -44,8 +44,8 @@ public class BirdData : MonoBehaviour
             dialogue_love = "Now that’s a dish I can dive into!", dialogue_hate = "This is missing that Mediterranean zing.",
             preferredCuisine = "Mediterranean", heartCount = 3, birdPrefab = GetBirdPrefab("Cockatoo")});
 
-        birds.Add(new Bird { name = "Redbird", dialogue = "I feel a bit chilly. Some curry could heat me up!", 
-            dialogue_love = "Mmm, the spices are just perfect!", dialogue_hate = "Wow, that dish is missing some serious flavor.",
+        birds.Add(new Bird { name = "Redbird", dialogue = "I feel a bit chilly. Some curry could heat me up!",
+            dialogue_love = "Mmm, the spices are just perfect!", dialogue_hate = "This is missing some serious flavor.",
             preferredCuisine = "Indian", heartCount = 3, birdPrefab = GetBirdPrefab("Redbird")});
 
         birds.Add(new Bird { name = "Opaline", dialogue = "I smell ginger and soy sauce...", 
@@ -53,12 +53,16 @@ public class BirdData : MonoBehaviour
             preferredCuisine = "Chinese", heartCount = 3, birdPrefab = GetBirdPrefab("Opaline")});
 
         birds.Add(new Bird { name = "Hummingbird", dialogue = "Craving some salsa... not the dance!", 
-            dialogue_love = "¡Esto es una FIESTA!", dialogue_hate = "This doesn’t exactly scream Taco Tuesday...",
+            dialogue_love = "¡Esto es una FIESTA!", dialogue_hate = "Doesn’t exactly scream Taco Tuesday...",
             preferredCuisine = "Mexican", heartCount = 3, birdPrefab = GetBirdPrefab("Hummingbird") });
 
         birds.Add(new Bird { name = "Criticbird", dialogue = "Mamma Mia! I'm hungry for garlic.", 
             dialogue_love = "This tastes like a cozy evening in Rome!", dialogue_hate = "I’ll be honest, this is not al dente.",
             preferredCuisine = "Italian", heartCount = 3, birdPrefab = GetBirdPrefab("Criticbird") });
+
+        birds.Add(new Bird { name = "Duck", dialogue = "Peep. Feed me!", 
+            dialogue_love = "Yum, yum!!! Scrumptious! ", dialogue_hate = "I don't dislike much, but hey, it happens.",
+            preferredCuisine = "All", heartCount = 3, birdPrefab = GetBirdPrefab("Duck") });
         
         Debug.Log($"First bird's name: {birds[0].name}");
 
