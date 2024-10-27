@@ -194,7 +194,7 @@ public class MealSubmissionForm : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    private void UpdateRecipeInputButton()
+    public void UpdateRecipeInputButton()
     {
         // Update the recipe input button based on the current meal count.
         recipeInputButton.interactable = mealCount < maxMealsPerDay;

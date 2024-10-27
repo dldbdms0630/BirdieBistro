@@ -36,6 +36,7 @@ public class Questionnaire : MonoBehaviour
         //only stored inputs in the variables for now
         mealGoal = int.Parse(numberOfMeals.text); //goal for number of meals
         form.UpdateMealCountText();
+        form.UpdateRecipeInputButton();
         
         // if (yesToggle.isOn) then we put all birds in the selected
         // and also call BirdData to update it 
