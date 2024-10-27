@@ -14,8 +14,10 @@ public class MealSubmissionForm : MonoBehaviour
     public Toggle cookedToggle;
     public Toggle takeoutToggle;
     public Button imageUploadButton;
-    public Button submitButton;
-    public Button reopenButton;
+    public Button submitButton; //button to submit
+    public Button reopenButton; //button to reopen
+    public Button exitButton; //button when user wants to exit
+    public bool complete = false; //sees if user successfully puts in entry
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +25,7 @@ public class MealSubmissionForm : MonoBehaviour
         // Add listener to buttons
         submitButton.onClick.AddListener(OnSubmit);
         reopenButton.onClick.AddListener(OnReopen);
+        exitButton.onClick.AddListener(Exit);
 
         // Hide the reopen button initially
         reopenButton.gameObject.SetActive(false);
@@ -53,7 +56,7 @@ public class MealSubmissionForm : MonoBehaviour
         // Display the submitted data (for testing purposes)
         string message = $"Recipe Name: {recipeName}\nDish Type: {dishType}\nIngredients: {ingredients}\nDate: {date}\nMeal Type: {mealType}\nPrepared Method: {preparedMethod}";
         Debug.Log(message);
-
+        complete = true;
         // Hide the form and show the reopen button
         gameObject.SetActive(false);
         reopenButton.gameObject.SetActive(true);
@@ -75,5 +78,8 @@ public class MealSubmissionForm : MonoBehaviour
         // Show the form and hide the reopen button
         gameObject.SetActive(true);
         reopenButton.gameObject.SetActive(false);
+    }
+    private void Exit() {
+        Application.Quit();
     }
 }
