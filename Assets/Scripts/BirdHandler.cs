@@ -90,8 +90,9 @@ public class BirdHandler : MonoBehaviour
     {
         if (mealForm != null)
         {
-            mealForm.setActive(true);
-            if (mealForm.complete) {
+            MealSubmissionForm form = mealForm.GetComponent<MealSubmissionForm>();
+            mealForm.SetActive(true);
+            if (form.complete) {
                 mealCount++; //gotta reset mealcount everyday (DATETIME) 
             }
         }

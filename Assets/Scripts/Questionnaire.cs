@@ -1,9 +1,11 @@
-// using TMPro;  // For TextMeshPro support
-// using UnityEngine;
-// using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;  // For TextMeshPro support
+using UnityEngine;
+using UnityEngine.UI;
 
-// public class PopUSystem : MonoBehaviour
-// {
+public class Questionnaire : MonoBehaviour
+{
 
     public TMP_InputField numberOfMeals;  // TextMeshPro input field
 
@@ -16,17 +18,8 @@
     public Toggle noNewCuisines;
 
     public Button submitButton; //name submit button this var.
-    public TextMeshProUGUI displayText;
+    public TextMeshProUGUI resultText;
 
-    void Start() 
-    {
-        submitButton.onClick.AddListener(OnSubmit);
-    }
-    
-    void OnSubmit()
-    {
-        
-    List<string> selectedCuisines = new List<string>();
     public int mealGoal;
     public List<string> selectedCuisines;
     string willingness;
@@ -39,7 +32,7 @@
     void OnSubmit()
     {
         //only stored inputs in the variables for now
-        mealGoal = int.parse(numberOfMeals.text); //goal for number of meals
+        mealGoal = int.Parse(numberOfMeals.text); //goal for number of meals
         
         selectedCuisines = new List<string>(); //list of types of meals user will eat
 
