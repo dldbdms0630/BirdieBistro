@@ -11,6 +11,9 @@ public class BirdHandler : MonoBehaviour
     public TextMeshProUGUI dialogueText; // make into textmeshpro instead?? 
     public Button recipeInputButton;
     public GameObject mealForm;
+    public Button recipeInputButton;
+    public GameObject settings;
+    private const string FirstTimeKey = "IsFirstTimeEver";
 
     public Vector3 zoomedInScale = new Vector3(1.1f, 1.1f, 1f);
     public Vector3 zoomedInPosition = new Vector3(-4.14f, -1.3f, -1.44f);
@@ -28,6 +31,22 @@ public class BirdHandler : MonoBehaviour
 
     void Start()
     {
+        openQuestionnaire.SetActive(false);
+        if (PlayerPrefs.HasKey(FirstTimeKey))
+        {
+            // The game has been launched before, nothing to do
+            Debug.Log("Welcome back!");
+        }
+        else
+        {
+            // This is the first time ever opening the game
+            Debug.Log("First time ever opening the game!");
+            RunFirstTimeEverSetup();
+            // Mark that the first time setup has been completed
+            PlayerPrefs.SetInt(FirstTimeKey, 1);
+            PlayerPrefs.Save(); 
+        }
+
         originalScale = transform.localScale; // store originalScale for resetting 
         originalPosition = transform.position;
         // hide UI initially 
@@ -37,6 +56,35 @@ public class BirdHandler : MonoBehaviour
         // mealForm.SetActive(false);
         birdName = gameObject.name;
         // specificBird = birdData.BirdData.Bird;
+    }
+
+    private void RunFirstTimeEverSetup()
+    {
+        Debug.Log("Welcome back!"); //replace with instructions LATER
+    }
+
+    //ADD BELOW CODE TO THE "ResetDailtMealCount()" function
+    private void ResetDailyMealCount()
+    {
+        if (mealCount < openQuestionnaire.mealGoal)
+        {
+            foreach (bird in birdData.birds) //remove 2 hearts instead of 1 each day
+            {
+            bird.heartCount--; //whenever heartCount reaches 0, bird leaves
+                if (heartCount == 0)
+                {
+                    bird.gameObject.SetActive(false); //DESTROY BIRD OBJECT INSTEAD OF THIS
+                }
+            }
+        }
+        foreach (bird in birdData.birds)
+        {
+            bird.heartCount--; 
+            if (heartCount == 0)
+            {
+                bird.gameObject.SetActive(false); 
+            }
+        }
     }
 
     public void AssignBirdData(BirdData.Bird data, GameObject speechBubble, TextMeshProUGUI dialogueText, Button recipeInputButton, GameObject mealForm)
