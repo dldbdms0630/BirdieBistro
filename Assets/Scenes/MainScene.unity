@@ -237,6 +237,54 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &290199712
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 290199714}
+  - component: {fileID: 290199713}
+  m_Layer: 0
+  m_Name: GameHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &290199713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 290199712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 206e8ad33d3584875af670a06a8f0b83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speechBubble: {fileID: 709683845}
+  dialogueText: {fileID: 379908621}
+  recipeInputButton: {fileID: 992272313}
+  mealForm: {fileID: 1806760969}
+--- !u!4 &290199714
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 290199712}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1018.5, y: 632.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &324731370
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,7 +449,7 @@ GameObject:
   - component: {fileID: 379908622}
   - component: {fileID: 379908621}
   m_Layer: 5
-  m_Name: text
+  m_Name: DialogueText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1219,6 +1267,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1530662286}
   m_CullTransparentMesh: 1
+--- !u!1 &1682858118
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1682858120}
+  - component: {fileID: 1682858119}
+  m_Layer: 0
+  m_Name: BirdSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1682858119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1682858118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6f51cbf9f75c4ff3a6e7a56d093198a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  birdDatabase: {fileID: 1957078190}
+  inviteButton: {fileID: 324731372}
+  speechBubble: {fileID: 709683845}
+  dialogueText: {fileID: 379908621}
+  recipeInputButton: {fileID: 992272313}
+  mealForm: {fileID: 1806760969}
+--- !u!4 &1682858120
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1682858118}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1018.5, y: 632.5, z: -1.44}
+  m_LocalScale: {x: -0.2, y: 0.2, z: 0.2}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1806760969
 GameObject:
   m_ObjectHideFlags: 0
@@ -1484,6 +1582,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Redbird
       objectReference: {fileID: 0}
+    - target: {fileID: 875214472802103237, guid: 715960faa95cd4000ada19329fabb1e2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7492297070116840658, guid: 715960faa95cd4000ada19329fabb1e2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.24
@@ -1560,6 +1662,10 @@ PrefabInstance:
     - target: {fileID: 646239476931949266, guid: 4006b2435546340089800cf66ee85db8, type: 3}
       propertyPath: m_Name
       value: Hummingbird
+      objectReference: {fileID: 0}
+    - target: {fileID: 646239476931949266, guid: 4006b2435546340089800cf66ee85db8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3550468994268433316, guid: 4006b2435546340089800cf66ee85db8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1698,6 +1804,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Criticbird
       objectReference: {fileID: 0}
+    - target: {fileID: 8204758013672341347, guid: 9a03ad642bd4d417d9f2363de951d775, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1734,6 +1844,10 @@ PrefabInstance:
     - target: {fileID: 4994494717707107567, guid: 06655b40752cc4a9f907884594776d9d, type: 3}
       propertyPath: m_Name
       value: Cockatoo
+      objectReference: {fileID: 0}
+    - target: {fileID: 4994494717707107567, guid: 06655b40752cc4a9f907884594776d9d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6016613180149745573, guid: 06655b40752cc4a9f907884594776d9d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1791,6 +1905,10 @@ PrefabInstance:
     - target: {fileID: 3809223399769060435, guid: ecf17735971a74fdb8bf45524c6cc17a, type: 3}
       propertyPath: m_Name
       value: Opaline
+      objectReference: {fileID: 0}
+    - target: {fileID: 3809223399769060435, guid: ecf17735971a74fdb8bf45524c6cc17a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5184603780811349397, guid: ecf17735971a74fdb8bf45524c6cc17a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1874,3 +1992,5 @@ SceneRoots:
   - {fileID: 874146778}
   - {fileID: 1125999783}
   - {fileID: 1957078191}
+  - {fileID: 290199714}
+  - {fileID: 1682858120}
