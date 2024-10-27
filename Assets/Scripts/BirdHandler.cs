@@ -8,7 +8,6 @@ using TMPro;
 public class BirdHandler : MonoBehaviour
 {
     public BirdData.Bird birdData; 
-    public TextMeshProUGUI mealCountText;
     public GameObject speechBubble;
     public TextMeshProUGUI dialogueText; // make into textmeshpro instead?? 
     public Button recipeInputButton;
@@ -29,8 +28,8 @@ public class BirdHandler : MonoBehaviour
     // private BirdData.Bird specificBird;
 
     private string birdName; 
-    private int mealCount = 0;
-    private int maxMealsPerDay = 3;
+    // private int mealCount = 0;
+    // private int maxMealsPerDay = 3;
     private DateTime lastMealSubmissionDate;
 
 
@@ -38,7 +37,7 @@ public class BirdHandler : MonoBehaviour
 
     void Start()
     {
-        UpdateMealCountText();
+        // UpdateMealCountText();
         // ClearPlayerPrefsForTesting();
         originalScale = transform.localScale; // store originalScale for resetting 
         originalPosition = transform.position;
@@ -53,14 +52,14 @@ public class BirdHandler : MonoBehaviour
         }
 
 
-        LoadMealData();
+        // LoadMealData();
         // Check if a new day has started.
-        if (IsNewDay())
-        {
-            ResetDailyMealCount();
-        }
-        // Update the recipe input button's status.
-        UpdateRecipeInputButton();
+        // if (IsNewDay())
+        // {
+        //     ResetDailyMealCount();
+        // }
+        // // Update the recipe input button's status.
+        // UpdateRecipeInputButton();
     }
 
     // private void ClearPlayerPrefsForTesting()
@@ -81,7 +80,7 @@ public class BirdHandler : MonoBehaviour
         this.recipeInputButton = recipeInputButton;
         this.mealForm = mealForm;
         this.inviteButton = inviteButton;
-        this.mealCountText = mealCountText;
+        // this.mealCountText = mealCountText;
 
         // Debug.Log($"SpeechBubble: {speechBubble}, DialogueText: {dialogueText}, RecipeInputButton: {recipeInputButton}, MealForm: {mealForm}");
 
@@ -264,72 +263,72 @@ public class BirdHandler : MonoBehaviour
             }
         }
         
-        mealCount++;
-        UpdateMealCountText();
-        lastMealSubmissionDate = DateTime.Now;
-        SaveMealData();
+        // mealCount++;
+        // UpdateMealCountText();
+        // lastMealSubmissionDate = DateTime.Now;
+        // SaveMealData();
 
 
-        if (mealCount >= maxMealsPerDay) 
-        {
-            recipeInputButton.interactable = false;
-        }
-        UpdateBirdUI();
+        // if (mealCount >= maxMealsPerDay) 
+        // {
+        //     recipeInputButton.interactable = false;
+        // }
+        // UpdateBirdUI();
     }
 
-    private void UpdateMealCountText()
-    {
-        mealCountText.text = mealCount.ToString() +"/" +maxMealsPerDay.ToString() + " meals";
-    }
+    // private void UpdateMealCountText()
+    // {
+    //     mealCountText.text = mealCount.ToString() +"/" +maxMealsPerDay.ToString() + " meals";
+    // }
 
-    private void ResetDailyMealCount()
-    {
-        if (IsNewDay())
-        {
-        mealCount = 0;
-        UpdateMealCountText();
-        recipeInputButton.interactable = true;
-        SaveMealData();
-        }
-    }
+    // private void ResetDailyMealCount()
+    // {
+    //     if (IsNewDay())
+    //     {
+    //     mealCount = 0;
+    //     UpdateMealCountText();
+    //     recipeInputButton.interactable = true;
+    //     SaveMealData();
+    //     }
+    // }
 
-    private bool IsNewDay()
-    {
-        return lastMealSubmissionDate.Date != DateTime.Now.Date;
-    }
+    // private bool IsNewDay()
+    // {
+    //     return lastMealSubmissionDate.Date != DateTime.Now.Date;
+    // }
 
-    private void LoadMealData()
-    {
-        // Load the meal count and last meal submission date from PlayerPrefs.
-        mealCount = PlayerPrefs.GetInt($"{birdData.name}_MealCount", 0);
-        string lastDateString = PlayerPrefs.GetString($"{birdData.name}_LastMealDate", DateTime.Now.ToString());
+    // private void LoadMealData()
+    // {
+    //     // Load the meal count and last meal submission date from PlayerPrefs.
+    //     mealCount = PlayerPrefs.GetInt($"{birdData.name}_MealCount", 0);
+    //     string lastDateString = PlayerPrefs.GetString($"{birdData.name}_LastMealDate", DateTime.Now.ToString());
 
-        if (DateTime.TryParse(lastDateString, out DateTime parsedDate))
-        {
-            lastMealSubmissionDate = parsedDate;
-        }
-        else
-        {
-            lastMealSubmissionDate = DateTime.Now;
-        }
+    //     if (DateTime.TryParse(lastDateString, out DateTime parsedDate))
+    //     {
+    //         lastMealSubmissionDate = parsedDate;
+    //     }
+    //     else
+    //     {
+    //         lastMealSubmissionDate = DateTime.Now;
+    //     }
 
-        UpdateMealCountText();
-        UpdateRecipeInputButton();
-    }
+    //     UpdateMealCountText();
+    //     UpdateRecipeInputButton();
+    // }
 
-    private void SaveMealData()
-    {
-        // Save the meal count and last meal submission date to PlayerPrefs.
-        PlayerPrefs.SetInt($"{birdData.name}_MealCount", mealCount);
-        PlayerPrefs.SetString($"{birdData.name}_LastMealDate", lastMealSubmissionDate.ToString());
-        PlayerPrefs.Save();
-    }
+    // private void SaveMealData()
+    // {
+    //     // Save the meal count and last meal submission date to PlayerPrefs.
+    //     PlayerPrefs.SetInt($"{birdData.name}_MealCount", mealCount);
+    //     PlayerPrefs.SetString($"{birdData.name}_LastMealDate", lastMealSubmissionDate.ToString());
+    //     PlayerPrefs.Save();
+    // }
 
-    private void UpdateRecipeInputButton()
-    {
-        // Update the recipe input button based on the current meal count.
-        recipeInputButton.interactable = mealCount < maxMealsPerDay;
-    }
+    // private void UpdateRecipeInputButton()
+    // {
+    //     // Update the recipe input button based on the current meal count.
+    //     recipeInputButton.interactable = mealCount < maxMealsPerDay;
+    // }
 
 
     private void LeaveVillage()
@@ -337,8 +336,8 @@ public class BirdHandler : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void UpdateBirdUI()
-    {
-        // update stuff like heartcount, dialogue etc based on new state 
-    }
+    // private void UpdateBirdUI()
+    // {
+    //     // update stuff like heartcount, dialogue etc based on new state 
+    // }
 }

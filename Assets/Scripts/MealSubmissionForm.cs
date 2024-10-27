@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,9 @@ using TMPro;
 public class MealSubmissionForm : MonoBehaviour
 {
     // UI Elements
+    public TextMeshProUGUI mealCountText;
+    public Button recipeInputButton;
+
     public TMP_InputField recipeNameInput;
     public TMP_Dropdown dishTypeDropdown;
     public TMP_Dropdown mealTypeDropdown;
@@ -18,14 +22,26 @@ public class MealSubmissionForm : MonoBehaviour
     public Button exitButton; //button when user wants to exit
     // public bool complete = false; //sees if user successfully puts in entry
 
+    private DateTime lastMealSubmissionDate;
+    private int mealCount = 0;
+    private int maxMealsPerDay = 3;
 
     private BirdHandler birdHandler; // reference to BirdHandler that has opened the form 
 
     void Start()
     {
+        UpdateMealCountText();
+
         // Add listener to buttons
         submitButton.onClick.AddListener(OnSubmit);
         exitButton.onClick.AddListener(Exit);
+
+        if (IsNewDay())
+        {
+            ResetDailyMealCount();
+        }
+        UpdateRecipeInputButton();
+
     }
 
     public void SetBirdHandler(BirdHandler handler)
@@ -60,6 +76,16 @@ public class MealSubmissionForm : MonoBehaviour
         if (birdHandler != null) 
         {
             birdHandler.ReceiveMeal(dishType, preparedMethod);
+
+            mealCount++;
+            UpdateMealCountText();
+            lastMealSubmissionDate = DateTime.Now;
+            SaveMealData();
+
+            if (mealCount >= maxMealsPerDay) 
+            {
+                recipeInputButton.interactable = false;
+            }
         }
         else
         {
@@ -102,5 +128,60 @@ public class MealSubmissionForm : MonoBehaviour
         mealTypeDropdown.value = 0;
         cookedToggle.isOn = false;
         takeoutToggle.isOn = false;
+    }
+
+
+        private void UpdateMealCountText()
+    {
+        mealCountText.text = mealCount.ToString() +"/" +maxMealsPerDay.ToString() + " meals";
+    }
+
+    private void ResetDailyMealCount()
+    {
+        if (IsNewDay())
+        {
+        mealCount = 0;
+        UpdateMealCountText();
+        recipeInputButton.interactable = true;
+        SaveMealData();
+        }
+    }
+
+    private bool IsNewDay()
+    {
+        return lastMealSubmissionDate.Date != DateTime.Now.Date;
+    }
+
+    private void LoadMealData()
+    {
+        // Load the meal count and last meal submission date from PlayerPrefs.
+        mealCount = PlayerPrefs.GetInt($"MealCount", 0);
+        string lastDateString = PlayerPrefs.GetString($"LastMealDate", DateTime.Now.ToString());
+
+        if (DateTime.TryParse(lastDateString, out DateTime parsedDate))
+        {
+            lastMealSubmissionDate = parsedDate;
+        }
+        else
+        {
+            lastMealSubmissionDate = DateTime.Now;
+        }
+
+        UpdateMealCountText();
+        UpdateRecipeInputButton();
+    }
+
+    private void SaveMealData()
+    {
+        // Save the meal count and last meal submission date to PlayerPrefs.
+        PlayerPrefs.SetInt($"MealCount", mealCount);
+        PlayerPrefs.SetString($"LastMealDate", lastMealSubmissionDate.ToString());
+        PlayerPrefs.Save();
+    }
+
+    private void UpdateRecipeInputButton()
+    {
+        // Update the recipe input button based on the current meal count.
+        recipeInputButton.interactable = mealCount < maxMealsPerDay;
     }
 }

@@ -7162,6 +7162,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28627d5be193942c1b62f333b969d52e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mealCountText: {fileID: 400080173}
+  recipeInputButton: {fileID: 992272313}
   recipeNameInput: {fileID: 1591068668}
   dishTypeDropdown: {fileID: 100703570}
   mealTypeDropdown: {fileID: 680872892}
