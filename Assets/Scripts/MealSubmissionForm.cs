@@ -92,7 +92,6 @@ public class MealSubmissionForm : MonoBehaviour
         {
             birdHandler.ReactivateBirdInteraction();
         }
-        // Application.Quit();
     }
 
     private void ResetForm()

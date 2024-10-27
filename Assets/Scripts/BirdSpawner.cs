@@ -21,7 +21,8 @@ public class BirdSpawner : MonoBehaviour
     [SerializeField] private Button recipeInputButton;
     [SerializeField] private GameObject mealForm;
     [SerializeField] private TextMeshProUGUI mealCountText;
-    
+    // [SerializeField] private TextMeshProUGUI timeText;
+
     void Start()
     {
         inviteButton.onClick.AddListener(InviteNewBird);

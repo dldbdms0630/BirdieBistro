@@ -15,7 +15,7 @@ public class BirdHandler : MonoBehaviour
     public GameObject mealForm;
     public Button inviteButton;
 
-    public Vector3 zoomedInScale = new Vector3(1.1f, 1.1f, 1f);
+    public Vector3 zoomedInScale = new Vector3(0.9f, 0.9f, 1f);
     public Vector3 zoomedInPosition = new Vector3(-4.14f, -1.3f, -1.44f);
     public Sprite happySprite;
 
@@ -38,6 +38,7 @@ public class BirdHandler : MonoBehaviour
 
     void Start()
     {
+        UpdateMealCountText();
         // ClearPlayerPrefsForTesting();
         originalScale = transform.localScale; // store originalScale for resetting 
         originalPosition = transform.position;
@@ -132,8 +133,7 @@ public class BirdHandler : MonoBehaviour
         {
             MealSubmissionForm form = mealForm.GetComponent<MealSubmissionForm>();
             form.SetBirdHandler(this); // set this birdhandler as the reference for 
-            mealForm.SetActive(true);
-            
+            mealForm.SetActive(true);            
             if (birdCollider != null)
             {
                 birdCollider.enabled = false;
@@ -210,18 +210,6 @@ public class BirdHandler : MonoBehaviour
         bool isHomeCooked = preparedMethod == "Cooked";
         bool isTakeOut = preparedMethod == "Takeout";
 
-        // if (dishType == birdData.preferredCuisine)
-        // {
-        //     Debug.Log($"{birdData.name} is happy with the meal!");
-        //     birdData.heartCount++; // increase heartcount if they like the meal
-        //     dialogueText.text = birdData.dialogue_love;
-
-        //     if (spriteRenderer != null && happySprite != null)
-        //     {
-        //         spriteRenderer.sprite = happySprite;
-        //     }
-        // }
-
         if (isPreferredCuisine)
         {
             if (isHomeCooked)
@@ -239,8 +227,10 @@ public class BirdHandler : MonoBehaviour
             }
             else if (isTakeOut)
             {
-                // Takeout and matches the preferred cuisine: 20% chance to gain a heart.
-                float chance = isDuck ? 0.5f : 0.2f; // 50% chance for ducks, 20% for others.
+                // don't match cuisine type but still cook then 50% 
+
+                // Takeout and matches the preferred cuisine: 50% chance for everything 
+                float chance = .5f;
                 if (UnityEngine.Random.value < chance)
                 {
                     birdData.heartCount++;
@@ -275,6 +265,7 @@ public class BirdHandler : MonoBehaviour
         }
         
         mealCount++;
+        UpdateMealCountText();
         lastMealSubmissionDate = DateTime.Now;
         SaveMealData();
 
@@ -286,11 +277,20 @@ public class BirdHandler : MonoBehaviour
         UpdateBirdUI();
     }
 
+    private void UpdateMealCountText()
+    {
+        mealCountText.text = mealCount.ToString() +"/" +maxMealsPerDay.ToString() + " meals";
+    }
+
     private void ResetDailyMealCount()
     {
+        if (IsNewDay())
+        {
         mealCount = 0;
+        UpdateMealCountText();
         recipeInputButton.interactable = true;
         SaveMealData();
+        }
     }
 
     private bool IsNewDay()
@@ -312,6 +312,9 @@ public class BirdHandler : MonoBehaviour
         {
             lastMealSubmissionDate = DateTime.Now;
         }
+
+        UpdateMealCountText();
+        UpdateRecipeInputButton();
     }
 
     private void SaveMealData()

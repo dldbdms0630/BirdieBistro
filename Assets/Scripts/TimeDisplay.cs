@@ -1,18 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class TimeDisplay : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public TextMeshProUGUI timeText;
 
-    // Update is called once per frame
     void Update()
     {
-        
+        timeText.text = System.DateTime.Now.ToString("HH:mm:ss");
     }
 }
