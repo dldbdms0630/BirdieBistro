@@ -1,21 +1,20 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class MealSubmissionForm : MonoBehaviour
 {
     // UI Elements
-    public InputField recipeNameInput;
-    public Dropdown dishTypeDropdown;
-    public InputField ingredientsInput;
-    public InputField dateInput;
-    public Toggle breakfastToggle;
-    public Toggle lunchToggle;
-    public Toggle dinnerToggle;
+    public TMP_InputField recipeNameInput;
+    public TMP_Dropdown dishTypeDropdown;
+    public TMP_Dropdown mealTypeDropdown;
+    public TMP_InputField ingredientsInput;
     public Toggle cookedToggle;
     public Toggle takeoutToggle;
-    public Button imageUploadButton;
+    // public Button imageUploadButton; // TAKE OUT JUST FOR NOW. 
     public Button submitButton; //button to submit
-    public Button reopenButton; //button to reopen
     public Button exitButton; //button when user wants to exit
     public bool complete = false; //sees if user successfully puts in entry
 
@@ -24,11 +23,7 @@ public class MealSubmissionForm : MonoBehaviour
     {
         // Add listener to buttons
         submitButton.onClick.AddListener(OnSubmit);
-        reopenButton.onClick.AddListener(OnReopen);
         exitButton.onClick.AddListener(Exit);
-
-        // Hide the reopen button initially
-        reopenButton.gameObject.SetActive(false);
     }
 
     private void OnSubmit()
@@ -37,49 +32,33 @@ public class MealSubmissionForm : MonoBehaviour
         string recipeName = recipeNameInput.text;
         string dishType = dishTypeDropdown.options[dishTypeDropdown.value].text;
         string ingredients = ingredientsInput.text;
-        string date = dateInput.text;
+        // string date = dateInput.text;
 
-        string mealType = "";
-        if (breakfastToggle.isOn) mealType = "Breakfast";
-        else if (lunchToggle.isOn) mealType = "Lunch";
-        else if (dinnerToggle.isOn) mealType = "Dinner";
+        string mealType = mealTypeDropdown.options[mealTypeDropdown.value].text;
+
+        // string mealType = "";
+        // if (breakfastToggle.isOn) mealType = "Breakfast";
+        // else if (lunchToggle.isOn) mealType = "Lunch";
+        // else if (dinnerToggle.isOn) mealType = "Dinner";
 
         string preparedMethod = cookedToggle.isOn ? "Cooked" : "Takeout";
 
         // Validation
-        if (string.IsNullOrEmpty(recipeName) || string.IsNullOrEmpty(dishType) || string.IsNullOrEmpty(ingredients) || string.IsNullOrEmpty(date) || string.IsNullOrEmpty(mealType))
+        if (string.IsNullOrEmpty(recipeName) || string.IsNullOrEmpty(dishType) || string.IsNullOrEmpty(ingredients) || string.IsNullOrEmpty(mealType))
         {
             Debug.LogWarning("Please fill in all fields.");
             return;
         }
 
         // Display the submitted data (for testing purposes)
-        string message = $"Recipe Name: {recipeName}\nDish Type: {dishType}\nIngredients: {ingredients}\nDate: {date}\nMeal Type: {mealType}\nPrepared Method: {preparedMethod}";
+        string message = $"Recipe Name: {recipeName}\nDish Type: {dishType}\nIngredients: {ingredients}\nMeal Type: {mealType}\nPrepared Method: {preparedMethod}";
         Debug.Log(message);
         complete = true;
-        // Hide the form and show the reopen button
         gameObject.SetActive(false);
-        reopenButton.gameObject.SetActive(true);
     }
 
-    private void OnReopen()
-    {
-        // Reset the form
-        recipeNameInput.text = "";
-        dishTypeDropdown.value = 0; // Assuming the first option is "Select dish type"
-        ingredientsInput.text = "";
-        dateInput.text = "";
-        breakfastToggle.isOn = false;
-        lunchToggle.isOn = false;
-        dinnerToggle.isOn = false;
-        cookedToggle.isOn = false;
-        takeoutToggle.isOn = false;
-
-        // Show the form and hide the reopen button
-        gameObject.SetActive(true);
-        reopenButton.gameObject.SetActive(false);
-    }
     private void Exit() {
-        Application.Quit();
+        gameObject.SetActive(false);
+        // Application.Quit();
     }
 }

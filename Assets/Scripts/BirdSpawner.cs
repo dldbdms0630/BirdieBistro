@@ -78,7 +78,7 @@ public class BirdSpawner : MonoBehaviour
         float xMin = -5f; // Example values, adjust based on your scene.
         float xMax = 5f;
         float yMin = -3f;
-        float yMax = 1f;
+        float yMax = -1f;
 
         float randomX = Random.Range(xMin, xMax);
         float randomY = Random.Range(yMin, yMax);

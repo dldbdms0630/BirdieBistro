@@ -56,7 +56,7 @@ public class BirdData : MonoBehaviour
             dialogue_love = "¡Esto es una FIESTA!", dialogue_hate = "This doesn’t exactly scream Taco Tuesday...",
             preferredCuisine = "Mexican", heartCount = 3, birdPrefab = GetBirdPrefab("Hummingbird") });
 
-        birds.Add(new Bird { name = "Criticbird", dialogue = "Mamma Mia! I'm hungry for cheesiness.", 
+        birds.Add(new Bird { name = "Criticbird", dialogue = "Mamma Mia! I'm hungry for garlic.", 
             dialogue_love = "This tastes like a cozy evening in Rome!", dialogue_hate = "I’ll be honest, this is not al dente.",
             preferredCuisine = "Italian", heartCount = 3, birdPrefab = GetBirdPrefab("Criticbird") });
         
