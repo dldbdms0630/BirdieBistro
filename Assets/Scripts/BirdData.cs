@@ -68,6 +68,35 @@ public class BirdData : MonoBehaviour
 
     }
 
+    public void RemoveBirdsByName(List<string> birdNamesToRemove)
+    {
+        foreach (string name in birdNamesToRemove)
+        {
+            // Remove from the data list.
+            birds.RemoveAll(bird => bird.name == name);
+
+            // Find any existing bird instances in the scene and destroy them.
+            BirdHandler[] birdInstances = FindObjectsOfType<BirdHandler>();
+            foreach (BirdHandler birdInstance in birdInstances)
+            {
+                if (birdInstance.birdData.name == name)
+                {
+                    Destroy(birdInstance.gameObject);
+                }
+            }
+        }
+        
+        Debug.Log("Birds removed. Remaining birds:");
+        foreach (var bird in birds)
+        {
+            Debug.Log(bird.name);
+        }
+    }
+
+
+
+    // based on questionairre choose what to delete. 
+
     private GameObject GetBirdPrefab(string prefabName)
     {
         return Resources.Load<GameObject>(prefabName);

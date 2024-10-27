@@ -10,6 +10,7 @@ public class MealSubmissionForm : MonoBehaviour
     // UI Elements
     public TextMeshProUGUI mealCountText;
     public Button recipeInputButton;
+    public Questionnaire questionnaire;
 
     public TMP_InputField recipeNameInput;
     public TMP_Dropdown dishTypeDropdown;
@@ -131,9 +132,15 @@ public class MealSubmissionForm : MonoBehaviour
     }
 
 
-        private void UpdateMealCountText()
+    public void UpdateMealCountText()
     {
-        mealCountText.text = mealCount.ToString() +"/" +maxMealsPerDay.ToString() + " meals";
+        int temp = maxMealsPerDay;
+        maxMealsPerDay = questionnaire.mealGoal;
+        if (mealCount > maxMealsPerDay) {
+            maxMealsPerDay = temp;
+        } else {
+            mealCountText.text = mealCount.ToString() +"/" +maxMealsPerDay.ToString() + " meals";
+        }
     }
 
     private void ResetDailyMealCount()
@@ -149,8 +156,16 @@ public class MealSubmissionForm : MonoBehaviour
 
     private bool IsNewDay()
     {
-        return lastMealSubmissionDate.Date != DateTime.Now.Date;
+        // For testing, consider a "new day" to be every minute.
+        TimeSpan timeSinceLastMeal = DateTime.Now - lastMealSubmissionDate;
+        return timeSinceLastMeal.TotalMinutes >= 1;
     }
+
+
+    // private bool IsNewDay()
+    // {
+    //     return lastMealSubmissionDate.Date != DateTime.Now.Date;
+    // }
 
     private void LoadMealData()
     {
